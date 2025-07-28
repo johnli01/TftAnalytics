@@ -1,7 +1,7 @@
 import requests
-from src.riot.utils.helper import populate_path
-from src.riot.config.region_hosts import HOSTS
-from src.riot.config.paths import PATHS
+from shared.riot.utils.helper import populate_path
+from shared.riot.config.region_hosts import HOSTS
+from shared.riot.config.paths import PATHS
 
 class MatchesApi:
     def __init__(self, api_key):
