@@ -10,8 +10,7 @@ const PlayerStatsPanel = ({ region, name, tag }) => {
   if (error) return <p className="text-red-600">{error}</p>;
 
   return (
-    <section className="mb-6">
-      <h2 className="text-xl font-semibold mb-2">Statistics</h2>
+    <section className="mb-6 pt-5">
       <PlayerStatsCard
         totalGames={stats.totalGames}
         wins={stats.wins}

@@ -2,7 +2,7 @@ import React from "react";
 
 function PlayerCard({ name, tag, profilePicUrl }) {
   return (
-    <div className="w-[200px] h-[250px] flex flex-col items-center bg-[#2C2F4A] rounded-lg border border-[#4B5A6F] p-4">
+    <div className="w-[200px] h-[250px] flex flex-col items-center bg-[#2C2F4A] rounded-lg pt-11">
       <img
         src={profilePicUrl}
         alt="profile"

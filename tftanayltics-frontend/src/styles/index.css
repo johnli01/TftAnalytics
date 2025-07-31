@@ -4,5 +4,5 @@
 @import "tailwindcss";
 
 body {
-    @apply background-[#181A20] text-white;
+    @apply bg-[#181A20] text-white;
 }
