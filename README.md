@@ -20,26 +20,31 @@ TftAnalytics is a comprehensive web application that allows Teamfight Tactics (T
 - **Flask-CORS** – Handling frontend-backend communication
 - **Requests** – Making HTTP calls to Riot endpoints
 
-## 📁 Project Structure
-TftAnalytics/
-├── backend/                       # Python Flask backend
-│   ├── app.py                     # Entry point for the Flask app
-│   ├── riot_api/                  # Riot API wrapper and data fetch logic
-│   └── utils/                     # Any helper functions or constants
+tftanalytics/
+├── backend/
+│ ├── api/
+│ │ ├── init.py # Flask API blueprint setup
+│ │ ├── player.py # Player related API routes
+│ │ ├── match.py # Match related API routes
+│ │ └── stats.py # Stats related API routes
+│ ├── models/ # Database models (if any)
+│ ├── services/ # Riot API wrapper and internal services
+│ ├── app.py # Flask app entrypoint
+│ └── config.py # Configuration files
 │
-├── frontend/                      # React frontend
-│   ├── features/                  # Feature modules
-│   │   └── Player/                # Player-specific UI and logic
-│   │       ├── components/        # React components for Player UI
-│   │       │   ├── cards/         # Stats and info cards
-│   │       │   └── panels/        # Larger display panels
-│   │       └── hooks/             # Custom React hooks for data fetching
-│   ├── App.jsx                    # Main application component
-│   ├── index.css                  # TailwindCSS imports
-│   └── main.jsx                   # Entry point for Vite
+├── frontend/
+│ ├── public/ # Static assets (index.html, favicon, etc.)
+│ ├── src/
+│ │ ├── components/ # Reusable React components (PlayerCard, StatCard, etc.)
+│ │ ├── features/
+│ │ │ └── Player/ # Player-specific components & hooks
+│ │ │ ├── components/
+│ │ │ ├── hooks/
+│ │ │ └── pages/
+│ │ ├── styles/ # Tailwind base styles and custom css
+│ │ ├── App.jsx # Main React app component and router setup
+│ │ └── main.jsx # React entrypoint
+│ ├── tailwind.config.js # Tailwind CSS configuration
+│ └── vite.config.js # Vite build tool configuration
 │
-├── public/                        # Static assets
-│   └── demo.png                   # Demo screenshot for README
-│
-├── README.md
-└── .env                           # Environment variables (not committed)
+└── README.md # This file
