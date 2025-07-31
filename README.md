@@ -20,6 +20,8 @@ TftAnalytics is a comprehensive web application that allows Teamfight Tactics (T
 - **Flask-CORS** – Handling frontend-backend communication
 - **Requests** – Making HTTP calls to Riot endpoints
 
+## 📁 Project Structure
+ ```
 tftanalytics/
 ├── backend/
 │ ├── api/
@@ -48,3 +50,4 @@ tftanalytics/
 │ └── vite.config.js # Vite build tool configuration
 │
 └── README.md # This file
+ ```
