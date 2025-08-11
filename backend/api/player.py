@@ -1,31 +1,39 @@
 from flask import Blueprint, jsonify, request, abort
 from backend.services.player_services import get_player_profile
+from shared.riot.TftApi import TftApi
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv(dotenv_path="keys.env")
+tft_api = TftApi(os.getenv("API_KEY"))
 
 player_bp = Blueprint("player", __name__)
+tft_api = TftApi(os.getenv("API_KEY"))
 
 @player_bp.route("/<region>/<player_name>/<tag>", methods=["GET"])
-def get_player_profile(region, player_name, tag):
-    """
-    GET /api/player/<region>/<player_name>
-    Returns the player profile, recent matches, and aggregated stats.
-    """
-    # Basic validation could be added here if needed
-    # if not region or not player_name:
-    #     abort(400, "Region and player_name are required")
+def get_player(region, player_name, tag):
+    print("Fetching player profile for:", player_name, "with tag:", tag, "in region:", region)
+    try:
+        # 1. Get summoner info by Riot ID (name + tag)
+        summoner_info = tft_api.get_summoner_puuid_by_riot_id(player_name, tag, region)
+        if isinstance(summoner_info, str):
+            # error response as text
+            return jsonify({"error": summoner_info}), 400
 
-    # try:
-    #     # Call your service layer to fetch and aggregate player data
-    #     player_data = get_player_profile(region, player_name)
-    #     if not player_data:
-    #         return jsonify({"error": "Player not found"}), 404
+        puuid = summoner_info.get("puuid")
+        print("PUUID found:", puuid)
+        if not puuid:
+            return jsonify({"error": "PUUID not found"}), 404
+        response = {
+            "name": summoner_info.get("name", player_name),
+            "tag": summoner_info.get("tagLine", tag),
+            "puuid": puuid,
+            "region": region
+        }
 
-    #     return jsonify(player_data), 200
-    # except Exception as e:
-    #     # Log error here as needed
-    #     return jsonify({"error": str(e)}), 500
-    print("getting called on")
-    return jsonify({
-        "region": region,
-        "name": player_name,
-        "tag": tag
-    })
+        return jsonify(response)
+
+    except Exception as e:
+        print("Error fetching player profile:", str(e))
+        return jsonify({"error": str(e)}), 500

@@ -11,10 +11,10 @@ class SummonerApi:
     def get_summoner_puuid_by_riot_id(self, summoner_name, tag, region):
         host = HOSTS['riot'][region]
         path = PATHS['tft']['summoner']['get_summoner_by_riot_id']
-        url = populate_path(host,path, summoner_name=summoner_name, tag=tag)
+        url = populate_path(host, path, gameName=summoner_name, tagLine=tag)
         params = {"api_key": self.api_key}
 
-        print(url)
+        print("URL: ", url)
         response = requests.get(url, params=params)
         return response.json() if response.status_code == 200 else response.text
     
