@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export function usePlayerInfo(region, name, tag) {
-  const [playerInfo, setPlayerData] = useState(null);
+  const [playerInfo, setPlayerInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,7 +22,9 @@ export function usePlayerInfo(region, name, tag) {
         }
 
         const data = await response.json();
-        setPlayerData(data);
+        setPlayerInfo(data);
+        
+        console.log("Player info fetched:", data);
       } catch (err) {
         console.error("Failed to fetch player data:", err);
         setError("Failed to load player data.");
@@ -35,6 +37,6 @@ export function usePlayerInfo(region, name, tag) {
   }, [region, name, tag]);
 
   return { playerInfo, loading, error };
-};
+}
 
 export default usePlayerInfo;

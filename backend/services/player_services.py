@@ -13,6 +13,7 @@ def get_profile_block(player_name, tag, puuid, region):
     res = {
         "name": player_name,
         "tag": tag,
+        "region": region,
         "profileIconUrl": profile_info["profileIconId"],
         "summonerLevel": profile_info["summonerLevel"]
     }

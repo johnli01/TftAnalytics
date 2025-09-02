@@ -8,22 +8,27 @@ function getColorClass(placement) {
   return "border-[#bbbbbb] text-[#bbbbbb]";
 }
 
-function PlayerLast20PlacementCard({ placements }) {
+function PlayerLast20PlacementCard({ matches }) {
   return (
     <div className="rounded-[10px] w-[200px] h-[175px]">
         <h2 className="text-white font-bold text-lg text-center">Last 20 Games</h2>
-        <div className="pt-2 pl-6 pr-5 grid grid-cols-5 gap-x-[1px] gap-y-[5px]">
-        {placements.map((placement, index) => (
-            <div
-            key={index}
+    <div className="pt-2 pl-6 pr-5 grid grid-cols-5 gap-x-[1px] gap-y-[5px]">
+      {matches && matches.length > 0 ? (
+        matches.map((match, index) => (
+          <div
+            key={match.matchId || index}
             className={`w-6 h-6 rounded-[5px] border-[2.5px] flex items-center justify-center text-[20px] font-semibold ${getColorClass(
-                placement
+              match.placement
             )}`}
-            >
-            {placement}
-            </div>
-        ))}
-        </div>
+          >
+            {match.placement}
+          </div>
+        ))
+      ) : (
+        <p className="text-white col-span-5">No matches found.</p>
+      )}
+    </div>
+
     </div>
   );
 }

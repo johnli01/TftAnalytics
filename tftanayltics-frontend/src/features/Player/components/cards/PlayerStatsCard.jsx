@@ -1,25 +1,22 @@
-// features/Player/components/cards/PlayerStatsCard.jsx
 import React from "react";
 
 const PlayerStatsCard = ({ totalGames, wins, top4Rate, avgPlacement }) => {
   return (
     <div className="grid grid-cols-2 gap-4">
-      <div className="bg-[#2C2F4A] rounded-xl p-3 text-center">
-        <h3 className="flex text-lg font-bold text-white-80">Games</h3>
-        <p className="text-xl">{totalGames}</p>
-      </div>
-      <div className="bg-[#2C2F4A] rounded-xl p-3 text-center">
-        <h3 className="text-lg font-bold text-white-800">Wins</h3>
-        <p className="text-xl">{wins}</p>
-      </div>
-      <div className="bg-[#2C2F4A] rounded-xl p-3 text-center">
-        <h3 className="text-lg font-bold text-white-800">Top 4%</h3>
-        <p className="text-xl">{top4Rate}%</p>
-      </div>
-      <div className="bg-[#2C2F4A] rounded-xl p-3 text-center">
-        <h3 className="text-lg font-bold mb-1 text-center break-words">Avg</h3>
-        <p className="text-xl">{avgPlacement}</p>
-      </div>
+      {[ 
+        { label: "Games", value: totalGames }, 
+        { label: "Avg", value: avgPlacement }, 
+        { label: "Wins", value: wins + "%" }, 
+        { label: "Top 4%", value: top4Rate } 
+      ].map((stat, index) => (
+        <div
+          key={index}
+          className="bg-[#2C2F4A] rounded-lg p-4 flex flex-col items-center justify-center"
+        >
+          <h3 className="text-white text-sm font-semibold text-center mb-1">{stat.label}</h3>
+          <p className="text-white text-lg font-bold">{stat.value}</p>
+        </div>
+      ))}
     </div>
   );
 };
