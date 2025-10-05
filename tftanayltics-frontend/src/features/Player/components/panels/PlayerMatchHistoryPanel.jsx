@@ -31,38 +31,66 @@ const PlayerMatchHistoryPanel = ({ matches }) => {
         {matches.map((match) => (
           <li
             key={match.matchId}
-            className="flex flex-col bg-[#2C2F4A] p-4 rounded-lg shadow-md"
+            className="flex flex-col bg-[#2C2F4A] pt-2 pb-3 px-4 rounded-lg shadow-md"
           >
-            {/* Top Row: Placement + Game Info */}
-            <div className="flex items-center justify-between mb-3">
-              <span
-                className={`w-8 h-8 flex items-center justify-center rounded-[5px] border-2 font-bold text-lg ${getColorClass(
-                  match.placement
-                )}`}
-              >
-                {match.placement}
-              </span>
-              <span className="text-gray-400 text-sm whitespace-nowrap">
-                {Math.round(match.gameLength / 60)}m •{" "}
+            {/* Traits Row and game date time, full width */}
+            <div className="flex items-center justify-between mb-1 w-full">
+              <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap flex-1">
+                <span className="text-[10px] text-gray-400 px-1 py-0.5 rounded font-semibold bg-gray-800 truncate block text-center">
+                  RANKED
+                </span>
+                <div className="flex items-center gap-1" style={{ marginLeft: '10px' }}>
+                  {match.traits?.map((trait, idx) => (
+                    <span key={idx} className="inline-flex items-center justify-center px-1 py-0.5 rounded font-semibold bg-gray-800 border border-gray-600 text-[10px] text-gray-400" style={{ width: 'auto', height: 'auto' }}>
+                      <img
+                        src="/trait-placeholder.png"
+                        alt={`Trait ${idx + 1}`}
+                        className="w-4 h-4 object-cover mr-1"
+                      />
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <span className="text-[12px] text-gray-400 ml-4 whitespace-nowrap font-semibold">
                 {new Date(match.gameDatetime).toLocaleDateString()}
               </span>
             </div>
-
-            {/* Units Row */}
-            <div className="flex flex-wrap gap-2">
-              {match.units?.map((unit, idx) => (
-                <div
-                  key={idx}
-                  className="w-10 h-10 flex items-center justify-center rounded-md bg-[#1E2030] border border-gray-700 overflow-hidden"
+            {/* Main Row: Placement + Units + Info */}
+            <div className="flex items-center justify-between">
+              {/* Placement */}
+              <div className="flex flex-col items-center mr-4" style={{ minWidth: "48px" }}>
+                <span
+                  className={`w-11 h-11 flex items-center justify-center rounded-[6px] border-2 font-bold text-xl ${getColorClass(
+                    match.placement
+                  )}`}
                 >
-                  <img
-                    src={`https://cdn.yourdomain.com/units/${unit.characterId}.png`}
-                    alt={""}
-                    onError={handleImgError}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
+                  {match.placement}
+                </span>
+              </div>
+              {/* Units Row */}
+              <div className="flex gap-2 items-end justify-start flex-1">
+                {match.units?.map((unit, idx) => (
+                  <div
+                    key={idx}
+                    className="w-11 h-11 flex items-center justify-center rounded-[6px] bg-[#1E2030] border border-gray-700 overflow-hidden"
+                  >
+                    <img
+                      // src={`https://cdn.yourdomain.com/units/${unit.characterId}.png`}
+                      src={''}
+                      alt={unit.characterId}
+                      onError={handleImgError}
+                      className="w-11 h-11 object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+              {/* Game Info & Room for more */}
+              <div className="flex flex-col items-end ml-4" style={{ minWidth: "120px" }}>
+                {/* Room for match type, etc. */}
+                <span className="text-gray-400 text-xs mt-1">
+                  {match.matchType || ""}
+                </span>
+              </div>
             </div>
           </li>
         ))}
