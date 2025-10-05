@@ -44,7 +44,7 @@ const PlayerPage = () => {
           </div>
 
           <div className="w-full rounded-lg p-4">
-            <PlayerStatsPanel stats={playerInfo.stats} />
+            <PlayerStatsPanel stats={playerInfo.stats} matches={playerInfo.matches} />
           </div>
 
           <div className="w-full rounded-lg p-4">
