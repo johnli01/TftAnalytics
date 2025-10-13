@@ -1,6 +1,6 @@
 // features/Player/components/panels/PlayerStatsPanel.jsx
 import React from "react";
-import PlayerStatsCard from "../cards/PlayerStatsCard";
+import PlayerStatsCard from "../shared/PlayerStatsCard";
 
 function getWinPercentage(matches) {
   if (!Array.isArray(matches) || matches.length === 0) return 0;

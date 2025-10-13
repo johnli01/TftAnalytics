@@ -5,8 +5,8 @@ import { useParams } from "react-router-dom";
 import PlayerStatsPanel from "./components/panels/PlayerStatsPanel";
 import PlayerGraphPanel from "./components/panels/PlayerGraphPanel";
 import PlayerMatchHistoryPanel from "./components/panels/PlayerMatchHistoryPanel";
-import PlayerCard from "./components/cards/PlayerCard";
-import PlayerLast20PlacementCard from "./components/cards/PlayerLast20PlacementCard";
+import PlayerCard from "./components/shared/PlayerCard";
+import PlayerLast20PlacementCard from "./components/shared/PlayerLast20PlacementCard";
 import usePlayerInfo from "./hooks/usePlayerInfo";
 
 const PlayerPage = () => {
@@ -55,7 +55,7 @@ const PlayerPage = () => {
         {/* Right Panel */}
         <div className="flex-1 flex flex-col gap-6">
           {/* Graph Section */}
-          <PlayerGraphPanel matches={playerInfo.matches} />
+          <PlayerGraphPanel playerInfo={playerInfo} />
           <PlayerMatchHistoryPanel matches={playerInfo.matches} />
         </div>
         

@@ -33,7 +33,8 @@ def get_stats_block(puuid, region):
     return res
 
 def get_matches_block(puuid, region):
-    match_ids = tft_api.get_match_ids(puuid, region, start=0, count=20)
+    match_ids = tft_api.get_match_ids(puuid, region, start=0, count=4)
+    print("IDS : ", match_ids)
     res = []    
     for match_id in match_ids:
         match_data = tft_api.get_match_details(match_id)
@@ -58,6 +59,14 @@ def get_matches_block(puuid, region):
                     "rarity": u.get("rarity", 1),
                     "items": u.get("itemNames", [])
                 } for u in participant.get("units", [])
+            ],
+            "traits": [
+                {
+                    "name": t.get("name"),
+                    "tier_current": t.get("tier_current"),
+                    "style": t.get("style"),
+                    "num_units": t.get("num_units"),
+                } for t in participant.get("traits", [])
             ]
         }
 

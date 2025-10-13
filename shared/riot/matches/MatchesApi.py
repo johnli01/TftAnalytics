@@ -29,6 +29,6 @@ class MatchesApi:
         url = populate_path(host, path, matchId=match_id)
         params = {"api_key": self.api_key}
 
-        print(url)
+        print("get_match_details: ", url)
         response = requests.get(url, params=params)
         return response.json() if response.status_code == 200 else response.text
